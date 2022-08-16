@@ -1,0 +1,13 @@
+{
+    "name": "UserAndRoles",
+    "alias": "userandroles",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\UserAndRoles\\Providers\\UserAndRolesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
