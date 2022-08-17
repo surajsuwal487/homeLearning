@@ -38,17 +38,5 @@ class UserSeeder extends Seeder
          'status'   => "active",
         ]);
         $user->roles()->attach($role1);
-
-
-        $role1       = Role::where('name', 'vendor')->first();
-        $vendor = User::create([
-         'name'     => 'default-vendor',
-         'slug'=>"default-vendorr",
-         'email'    => 'vendor@vendor.com',
-         'phone_no' =>9800000000,
-         'password' => Hash::make('password'),
-         'status'   => "active",
-        ]);
-        $vendor->roles()->attach($role1);
     }
 }

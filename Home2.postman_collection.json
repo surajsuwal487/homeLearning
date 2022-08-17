@@ -1,0 +1,490 @@
+{
+	"info": {
+		"_postman_id": "d71566a0-2b5f-47fa-abd7-1752675072e7",
+		"name": "Home2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16527445"
+	},
+	"item": [
+		{
+			"name": "UserAndRoles",
+			"item": [
+				{
+					"name": "registerVerificationCode Copy",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNTM0MWQ5NjRhNmVlNmYyMDVkMzg2MDhiZDUyNTljZDgwNTU1ZDYzNTNhODA0ZTRkNDNlYTgwNzFkYThkYmMzYWFmN2Y4NmQ2YWY5MDQ2ZDciLCJpYXQiOjE2Mjk4NzY2MjkuMzc2MTkyLCJuYmYiOjE2Mjk4NzY2MjkuMzc2MTk4LCJleHAiOjE2NjE0MTI2MjkuMzY2NTIsInN1YiI6IjIiLCJzY29wZXMiOltdfQ.YfuPda0VK2U5DbwymU96LHqFW3od29-ODJSjQ2xCNA1neSb_DKW5YGS-NH3ykGE0Flc9TN-e60QiAFHCPKnUHG6LH6F79MvGMbunT9-V8wzymwyU4CshgJuEk5mijfV-fnBAIfXEgwjjAC4ZSvWPyZEP8YaE2zo-18gaw83xllSQwPpSS_DFj_B614Wsz1Vfjv3iBCtkJ3Gh2L_WsDpwA-IGNYFo0ib3XuEwe4KX0dLW3Nk1s__ioOt7stJSq0A3So_FFwfuaEKIAzKnqXFk_W7_hIsSm7oRlQuYD0Q40-beeCljdimTCu612qcLIZ8zevygLFhjeJBoY3XJKU1mTl2xrqeh9Zw3fns1pMFPAf5-P18KinU8lE1gGGXv6TQW7DA0fr2bjTS0XJLo3REiPute4yJZjMF-37iHdwv1lcAcpREGyT3z8UWYF-MBfPMoFLxv-dBARGAM9BSfDFBEDhjzPR5DVN7EC_LNRAhFIYHqHcUpEaGYQ2oOB5enNZTfi9gTDS1rXgR7wtFyGAH9OX5JGiZVtWtqDlvXFDgJ_lHpCxlFsmBVqKKtkn6kJyBjfrA3C-Pk4EHHnrKTi5sw-gD-AKbQYcBw3gD44poGAqHkBhykjYylqc36NZplerelJOPqK4ejhcLY7JikbtpJJM9HL9eba1VHi7hmY0IFjHI",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "suraj1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "surajsuwal487@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "9876544",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "confirm_password",
+									"value": "987654",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phone_no",
+									"value": "9860171834",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}user/register/send-verifycode",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"register",
+								"send-verifycode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userRegister Copy",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNTM0MWQ5NjRhNmVlNmYyMDVkMzg2MDhiZDUyNTljZDgwNTU1ZDYzNTNhODA0ZTRkNDNlYTgwNzFkYThkYmMzYWFmN2Y4NmQ2YWY5MDQ2ZDciLCJpYXQiOjE2Mjk4NzY2MjkuMzc2MTkyLCJuYmYiOjE2Mjk4NzY2MjkuMzc2MTk4LCJleHAiOjE2NjE0MTI2MjkuMzY2NTIsInN1YiI6IjIiLCJzY29wZXMiOltdfQ.YfuPda0VK2U5DbwymU96LHqFW3od29-ODJSjQ2xCNA1neSb_DKW5YGS-NH3ykGE0Flc9TN-e60QiAFHCPKnUHG6LH6F79MvGMbunT9-V8wzymwyU4CshgJuEk5mijfV-fnBAIfXEgwjjAC4ZSvWPyZEP8YaE2zo-18gaw83xllSQwPpSS_DFj_B614Wsz1Vfjv3iBCtkJ3Gh2L_WsDpwA-IGNYFo0ib3XuEwe4KX0dLW3Nk1s__ioOt7stJSq0A3So_FFwfuaEKIAzKnqXFk_W7_hIsSm7oRlQuYD0Q40-beeCljdimTCu612qcLIZ8zevygLFhjeJBoY3XJKU1mTl2xrqeh9Zw3fns1pMFPAf5-P18KinU8lE1gGGXv6TQW7DA0fr2bjTS0XJLo3REiPute4yJZjMF-37iHdwv1lcAcpREGyT3z8UWYF-MBfPMoFLxv-dBARGAM9BSfDFBEDhjzPR5DVN7EC_LNRAhFIYHqHcUpEaGYQ2oOB5enNZTfi9gTDS1rXgR7wtFyGAH9OX5JGiZVtWtqDlvXFDgJ_lHpCxlFsmBVqKKtkn6kJyBjfrA3C-Pk4EHHnrKTi5sw-gD-AKbQYcBw3gD44poGAqHkBhykjYylqc36NZplerelJOPqK4ejhcLY7JikbtpJJM9HL9eba1VHi7hmY0IFjHI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "phone_no",
+									"value": "9800000001",
+									"type": "text"
+								},
+								{
+									"key": "verification_code",
+									"value": "8616",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}user/register",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "hotel_name",
+									"value": "RB Hotel",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "test1update",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test1update@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "7",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phone_no",
+									"value": "9803829207",
+									"type": "text"
+								},
+								{
+									"key": "dateofbirth",
+									"value": "2054-11-16",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "koteshwor",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/Suwal/Downloads/16550180523566.jpg"
+								},
+								{
+									"key": "confirmpassword",
+									"value": "password1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}user/update",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword Copy",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "currentpassword",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "newpassword",
+									"value": "test1updated",
+									"type": "text"
+								},
+								{
+									"key": "confirmpassword",
+									"value": "test1updated",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}user/changepassword",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"changepassword"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "rakeshbasnet086@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "newpassword",
+									"value": "rbs@123",
+									"disabled": true
+								},
+								{
+									"key": "confirmpassword",
+									"value": "rbs@123",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test1update@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "newpassword",
+									"value": "test1update",
+									"type": "text"
+								},
+								{
+									"key": "confirmpassword",
+									"value": "test1update",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}user/forgotPassword/changepassword?email=test1update@gmail.com&newpassword=test1updatedforgot&confirmpassword=test1updatedforgot",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"forgotPassword",
+								"changepassword"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "test1update@gmail.com"
+								},
+								{
+									"key": "newpassword",
+									"value": "test1updatedforgot"
+								},
+								{
+									"key": "confirmpassword",
+									"value": "test1updatedforgot"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth Copy",
+			"item": [
+				{
+					"name": "login",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}user/login",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}user/logout",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
