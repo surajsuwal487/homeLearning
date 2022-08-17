@@ -20,6 +20,7 @@
                                             <th><i class=""></i> SN</th>
                                             <th><i class="fa fa-calendar"></i> Category Name</th>
                                             <th><i class="fa fa-info"></i> Image</th>
+                                            <th><i class="fa fa-info"></i> Status</th>
                                             <th><i class="fa fa-cog"></i> Action</th>
                                         </tr>
                                     </thead>
@@ -31,6 +32,28 @@
                                                     <td>{{ $category['name'] }}</td>
                                                     <td><img src="{{ asset('uploads/images/categories/' . $category['image']) }}"
                                                             style="border-radius: 50%;" width="50" height="50">
+                                                    </td>
+                                                    <td>
+                                                        @if ($category['status'] == 'active')
+                                                            <select style="width:120px;" value="{{ $category['status'] }}"
+                                                                data-id="{{ base64_encode($category['id']) }}"
+                                                                class="status form-control btn-success change_status"
+                                                                name="status">
+                                                                <option value="active" class="btn-success" selected="true">
+                                                                    Active</option>
+                                                                <option value="inactive" class="btn-danger">Inactive
+                                                                </option>
+                                                            </select>
+                                                        @else
+                                                            <select style="width:120px;" value="{{ $category['status'] }}"
+                                                                data-id="{{ base64_encode($category['id']) }}"
+                                                                class="status form-control btn-danger change_status"
+                                                                name="status">
+                                                                <option value="active" class="btn-success">Active</option>
+                                                                <option value="inactive" class="btn-danger" selected="true">
+                                                                    Inactive</option>
+                                                            </select>
+                                                        @endif
                                                     </td>
                                                     <td class="row">
                                                         <form action="{{ route('cd-admin.edit_category') }}" method="get">
@@ -69,6 +92,7 @@
                                             <th><i class=""></i> SN</th>
                                             <th><i class="fa fa-calendar"></i> Category Name</th>
                                             <th><i class="fa fa-info"></i> Image</th>
+                                            <th><i class="fa fa-info"></i> Status</th>
                                             <th><i class="fa fa-cog"></i> Action</th>
                                         </tr>
                                     </tfoot>
@@ -80,6 +104,41 @@
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $("#categorytable").on('change','.change_status',function(e){
+                    e.preventDefault();
+                    var id = $(this).data("id");
+                    var me = this;
+                    $.ajax({
+                            url: "/cd-admin/changestatus",
+                            type: 'GET',
+                            data: {
+                                'id': id,
+                            },
+                            success: function(result) {
+                                if(result.id==null){
+                                    toastr.error('Failed to Update Status');
+                                }
+                                else{
+                                toastr.success('Status Updated successfully');
+                                if(result.status =="inactive"){
+                                    $(me).removeClass('btn-success').addClass("btn-danger");
+                                }
+                                else{
+                                    $(me).removeClass('btn-danger').addClass("btn-success");
+                                }
+                                }
+        
+                            },
+                    });
+        
+        
+                })
+            })
+        
+        </script>
 
     </section>
     <!--/ Zero configuration table -->

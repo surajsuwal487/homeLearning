@@ -207,4 +207,28 @@ class CategoryController extends Controller
             return back()->with('error',$e->getMessage);
         }
     }
+
+    public function changestatus(Request $request)
+    {
+        try {
+            // return $request->id;
+            $id = base64_decode($request->id);
+            $category = $this->CategoryRepository->find($id);
+            if ($category->status == 'active') {
+                $data['status'] = 'inactive';
+                $category = $this->CategoryRepository->update($data, $id);
+
+            } else {
+                $data['status'] = 'active';
+                $category = $this->CategoryRepository->update($data, $id);
+            }
+            return $category;
+
+        } catch (\Exception$e) {
+
+            $exception = $e->getMessage();
+            return $exception;
+        }
+
+    }
 }

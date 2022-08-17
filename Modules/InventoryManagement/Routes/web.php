@@ -12,6 +12,7 @@ Route::prefix('cd-admin')->name('cd-admin.')->group(function(){
    Route::post('/update-category', [CategoryController::class, 'update'])->name('update_category');
    Route::get('/delete-category/{slug}', [CategoryController::class, 'destroy'])->name('delete_category');
    Route::post('/deleteMultipleImages', [CategoryController::class, 'deleteMultipleImages'])->name('category.image.delete');
-});
 
+});
+Route::get('cd-admin/changestatus', [CategoryController::class, 'changestatus'])->name('changestatus');
 
