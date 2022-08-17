@@ -18,9 +18,9 @@ class MyTestMail extends Mailable
      *
      * @return void
      */
-    public function __construct($getOrder)
+    public function __construct($anything)
     {
-        $this->details = $getOrder;
+        $this->details = $anything;
     }
 
     /**
@@ -31,7 +31,7 @@ class MyTestMail extends Mailable
     public function build()
     
     {
-        return $this->subject('Order Successful')
-            ->view('order-successful');
+        return $this->subject('Mail Testing')
+            ->view('emails.myTestMail');
     }
 }

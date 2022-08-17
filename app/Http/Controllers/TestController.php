@@ -10,10 +10,13 @@ class TestController extends Controller
 {
     public function sendMail()
     {
-        $order = ['name' => 'suraj', 'product' => 'waterbottle', 'price' => '240'];
+        $details = [
+            'title' => 'THis is title',
+            'body' => 'This is another mail'
+        ];
         $email = 'surajsuwal487@gmail.com';
 
-        Mail::to($email)->send(new MyTestMail($order) );
+        Mail::to($email)->send(new MyTestMail($details) );
         dd('Mail has been sent successfully');
     }
 }

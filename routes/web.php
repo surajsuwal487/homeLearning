@@ -22,5 +22,5 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
-Route::get('/order-successful',[TestController::class, 'sendMail']);
+Route::get('/mailTestSuccessful',[TestController::class, 'sendMail']);
 
