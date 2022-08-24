@@ -14,13 +14,17 @@ use App\Http\Controllers\TestController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
 Route::get('/mailTestSuccessful',[TestController::class, 'sendMail']);
+
+Route::get('/login', function () {
+    return redirect('/cd-admin/login');
+});
 

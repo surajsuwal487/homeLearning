@@ -7,16 +7,14 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Category <small class="text-muted">List</small></h4>
+                        <h4 class="card-title">Category Trash<small class="text-muted">List</small></h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body card-dashboard">
                             <div class="">
                                 <table class="table zero-configuration" id='categorytable'>
-                                    <a href="{{ route('cd-admin.create_category') }}" class="link">Create
-                                        New</a>
-                                    <a href="{{ route('cd-admin.categories_trash') }}" class="link btn btn-danger float-right">Go to
-                                        trash</a>
+                                    <a href="{{ route('cd-admin.view_categories') }}" class="link btn btn-primary">Go to Categories
+                                        </a>
                                     <thead>
                                         <tr>
                                             <th><i class=""></i> SN</th>
@@ -58,18 +56,8 @@
                                                         @endif
                                                     </td>
                                                     <td class="row">
-                                                        <form action="{{ route('cd-admin.edit_category') }}" method="get">
-                                                            <input type="hidden" name="category"
-                                                                value="{{ $category['slug'] }}">
-                                                            <button type="submit"
-                                                                class="btn btn-icon btn-primary mr-1 waves-effect waves-light"
-                                                                data-toggle="tooltip" data-placement="top" title="edit"
-                                                                data-original-title="Edit">
-                                                                <i class="feather icon-edit"></i></button>
-                                                        </form>
-
                                                         <form
-                                                            action="{{ route('cd-admin.delete_category', [$category['slug']]) }}"
+                                                            action="{{ route('cd-admin.force_delete_category', [$category['slug']]) }}"
                                                             method="get">
                                                             @csrf
                                                             <button type="submit"
@@ -77,7 +65,19 @@
                                                                 data-toggle="tooltip" data-placement="top" title="delete"
                                                                 data-original-title="Delete"
                                                                 onclick="return confirm('Are you sure you want to delete this item')">
-                                                                <i class="feather icon-trash">Trash</i></button>
+                                                                <i class="feather icon-trash">Delete</i></button>
+                                                        </form>
+
+                                                        <form
+                                                            action="{{ route('cd-admin.restore_category', [$category['slug']]) }}"
+                                                            method="get">
+                                                            @csrf
+                                                            <button type="submit"
+                                                                class="btn btn-icon btn-success waves-effect waves-light"
+                                                                data-toggle="tooltip" data-placement="top" title="delete"
+                                                                data-original-title="Delete"
+                                                                onclick="return confirm('Are you sure you want to restore this item')">
+                                                                <i class="feather icon-trash">Restore</i></button>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -108,38 +108,35 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <script>
-            $(document).ready(function(){
-                $("#categorytable").on('change','.change_status',function(e){
+            $(document).ready(function() {
+                $("#categorytable").on('change', '.change_status', function(e) {
                     e.preventDefault();
                     var id = $(this).data("id");
                     var me = this;
                     $.ajax({
-                            url: "/cd-admin/changestatus",
-                            type: 'GET',
-                            data: {
-                                'id': id,
-                            },
-                            success: function(result) {
-                                if(result.id==null){
-                                    toastr.error('Failed to Update Status');
-                                }
-                                else{
+                        url: "/cd-admin/changestatus",
+                        type: 'GET',
+                        data: {
+                            'id': id,
+                        },
+                        success: function(result) {
+                            if (result.id == null) {
+                                toastr.error('Failed to Update Status');
+                            } else {
                                 toastr.success('Status Updated successfully');
-                                if(result.status =="inactive"){
+                                if (result.status == "inactive") {
                                     $(me).removeClass('btn-success').addClass("btn-danger");
-                                }
-                                else{
+                                } else {
                                     $(me).removeClass('btn-danger').addClass("btn-success");
                                 }
-                                }
-        
-                            },
+                            }
+
+                        },
                     });
-        
-        
+
+
                 })
             })
-        
         </script>
 
     </section>

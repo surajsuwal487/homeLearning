@@ -15,6 +15,7 @@ class AuthController extends Controller
     public function index()
     {
         $user = auth()->user();
+        // dd($user);
         if ($user != null) {
             return redirect(route('cd-admin.dashboard'));
         } else {

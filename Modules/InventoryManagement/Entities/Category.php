@@ -7,15 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Modules\InventoryManagement\Entities\CategoryImages;
 use Modules\InventoryManagement\Entities\Tag;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 
 class Category extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, SoftDeletes;
 
     protected $fillable = [
-        'name', 'slug', 'image', 'feature'
+        'name', 'slug', 'image', 'feature', 'status'
     ];
     
     protected static function newFactory()

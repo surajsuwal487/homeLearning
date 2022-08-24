@@ -46,6 +46,21 @@ class CategoryController extends Controller
         }
     }
 
+    public function viewTrash(Request $request)
+    {
+        try {
+            // $data = $this->categoryRepository->all()->toArray();
+            // $categories = $this->paginationRepository->paginateArray($data, $request);
+
+            $categories = Category::onlyTrashed()->get();
+            return view('inventorymanagement::backend.category.trash-categories', compact('categories'));
+        } catch (\Exception $e) {
+            $exception = $e->getMessage();
+            dd($e->getMessage());
+            return redirect()->back()->with('error', $exception);
+        }
+    }
+
     public function create()
     {
         try {
@@ -192,6 +207,37 @@ class CategoryController extends Controller
             }
             $data = $this->categoryRepository->deleteBySlug($slug);
             return redirect()->route('cd-admin.view_categories')->with('success', 'Category Deleted Successfully');
+        } catch (\Exception $e) {
+            $exception = $e->getMessage();
+            dd($e->getMessage());
+            return redirect()->back()->with('error', $exception);
+        }
+    }
+    public function restore($slug)
+    {
+        try {
+            $category = Category::withTrashed()->where('slug', $slug)->first();
+            // dd($category);
+            if(!is_null($category)){
+                $category->restore();
+            }
+            return redirect()->route('cd-admin.view_categories')->with('success', 'Category Restored Successfully');
+        } catch (\Exception $e) {
+            $exception = $e->getMessage();
+            dd($e->getMessage());
+            return redirect()->back()->with('error', $exception);
+        }
+    }
+
+    public function forceDelete($slug)
+    {
+        try {
+            $category = Category::withTrashed()->where('slug', $slug)->first();
+            // dd($category);
+            if(!is_null($category)){
+                $category->forceDelete();
+            }
+            return redirect()->back()->with('success', 'Category Deleted Successfully');
         } catch (\Exception $e) {
             $exception = $e->getMessage();
             dd($e->getMessage());

@@ -4,7 +4,7 @@
         <div class="navbar-container content">
             <div class="navbar-collapse" id="navbar-mobile">
                 <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
-                    {{-- <h5 class="text-capitalize">{{ auth()->user()->name }}</h5> --}}
+                    <h5 class="text-capitalize">{{ auth()->user()->name }}</h5>
                 </div>
                 <ul class="nav navbar-nav float-right">
                     <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i
