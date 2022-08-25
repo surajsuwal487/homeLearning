@@ -8,6 +8,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Modules\InventoryManagement\Entities\CategoryImages;
 use Modules\InventoryManagement\Entities\Tag;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 
 
@@ -23,6 +24,16 @@ class Category extends Model
     {
         return \Modules\InventoryManagement\Database\factories\CategoryFactory::new();
     }
+
+    //Mutators(changeBehaviour) in Laravel
+    // public function setNameAttribute($name){
+    //     $this->attributes['name'] = Str::upper($name);
+    // }
+
+    //Accessors in Laravel
+    // public function setNameAttribute($name){
+    //     return 'category' . ucfirst($name);
+    // }
 
     public function sluggable(): array
     {

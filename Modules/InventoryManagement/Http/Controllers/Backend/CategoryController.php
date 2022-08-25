@@ -23,7 +23,7 @@ class CategoryController extends Controller
     private $categoryImageRepository;
     private $paginationRepository;
 
-    public function __construct(CategoryRepository $categoryRepository, ImageRepository $imageRepository, CategoryImagesRepository $categoryImageRepository, PaginateRepository $paginationRepository )
+    public function __construct(CategoryRepository $categoryRepository, ImageRepository $imageRepository, CategoryImagesRepository $categoryImageRepository, PaginateRepository $paginationRepository)
     {
         $this->categoryRepository = $categoryRepository;
         $this->imageRepository = $imageRepository;
@@ -88,28 +88,29 @@ class CategoryController extends Controller
             $category = $this->categoryRepository->create($data);
 
             //for multiple images
-            if($category){
-                if($request->hasFile('multipleImages')){
+            if ($category) {
+                if ($request->hasFile('multipleImages')) {
                     foreach ($request->multipleImages as $key => $file) {
-                        $filename=$this->imageRepository->saveMultipleImage($file,'categories');
-                        $data=[
-                            'category_id'=> $category->id,
-                            'image'=> $filename,
+                        $filename = $this->imageRepository->saveMultipleImage($file, 'categories');
+                        $data = [
+                            'category_id' => $category->id,
+                            'image' => $filename,
                         ];
                         $this->categoryImageRepository->create($data);
                     }
                 }
-             }
+            }
             //  dd($category->id);
 
-             //for category tag
-             foreach($request->tags as $tag)
-             {
-                 $newTag = new CategoryTag();
-                 $newTag['tag_id'] = $tag;
-                 $newTag['category_id'] = $category->id;
-                 $newTag->save();
-             }
+            //for category tag
+            if ($request->tags != null) {
+                foreach ($request->tags as $tag) {
+                    $newTag = new CategoryTag();
+                    $newTag['tag_id'] = $tag;
+                    $newTag['category_id'] = $category->id;
+                    $newTag->save();
+                }
+            }
 
 
             return redirect()->route('cd-admin.view_categories')->with('success', 'Category created Successfully');
@@ -128,12 +129,11 @@ class CategoryController extends Controller
 
             // dd('hello');
             $tags = Tag::all();
-            
-            $selectTags = CategoryTag::where('category_id',$request->id)->get();
-            $selectedTags= array();
-            foreach($selectTags as $selectTag)
-            {
-                $selectedTags[] = $selectTag['tag_id']; 
+
+            $selectTags = CategoryTag::where('category_id', $request->id)->get();
+            $selectedTags = array();
+            foreach ($selectTags as $selectTag) {
+                $selectedTags[] = $selectTag['tag_id'];
             }
 
             $slug = $request->category;
@@ -164,32 +164,30 @@ class CategoryController extends Controller
             $category = $this->categoryRepository->update($data, $request->id);
 
             //for multiple images
-            if($category){
-                if($request->hasFile('multipleImages')){
+            if ($category) {
+                if ($request->hasFile('multipleImages')) {
                     foreach ($request->multipleImages as $key => $file) {
-                        $filename=$this->imageRepository->saveMultipleImage($file,'categories');
-                        $data=[
-                            'category_id'=> $request->id,
-                            'image'=> $filename,
+                        $filename = $this->imageRepository->saveMultipleImage($file, 'categories');
+                        $data = [
+                            'category_id' => $request->id,
+                            'image' => $filename,
                         ];
                         $this->categoryImageRepository->create($data);
                     }
                 }
-             }
+            }
 
-             //for tags
-             $categoryTags = CategoryTag::where('category_id',$request->id)->get();
-             foreach($categoryTags as $categoryTag)
-             {
-                 $categoryTag->delete();
-             }
-             foreach($request->tags as $tag)
-             {
-                 CategoryTag::create([
-                     'category_id' => $request->id,
-                     'tag_id' => $tag
-                 ]);
-             }
+            //for tags
+            $categoryTags = CategoryTag::where('category_id', $request->id)->get();
+            foreach ($categoryTags as $categoryTag) {
+                $categoryTag->delete();
+            }
+            foreach ($request->tags as $tag) {
+                CategoryTag::create([
+                    'category_id' => $request->id,
+                    'tag_id' => $tag
+                ]);
+            }
             return redirect()->route('cd-admin.view_categories')->with('success', 'Category Updated Successfully');
         } catch (\Exception $e) {
             $exception = $e->getMessage();
@@ -218,7 +216,7 @@ class CategoryController extends Controller
         try {
             $category = Category::withTrashed()->where('slug', $slug)->first();
             // dd($category);
-            if(!is_null($category)){
+            if (!is_null($category)) {
                 $category->restore();
             }
             return redirect()->route('cd-admin.view_categories')->with('success', 'Category Restored Successfully');
@@ -234,7 +232,7 @@ class CategoryController extends Controller
         try {
             $category = Category::withTrashed()->where('slug', $slug)->first();
             // dd($category);
-            if(!is_null($category)){
+            if (!is_null($category)) {
                 $category->forceDelete();
             }
             return redirect()->back()->with('success', 'Category Deleted Successfully');
@@ -245,12 +243,13 @@ class CategoryController extends Controller
         }
     }
 
-    public function deleteMultipleImages(Request $request){
+    public function deleteMultipleImages(Request $request)
+    {
         try {
             $this->categoryImageRepository->delete($request->id);
-            return back()->with('success','Image Removed Successfully');
+            return back()->with('success', 'Image Removed Successfully');
         } catch (\Exception $e) {
-            return back()->with('error',$e->getMessage);
+            return back()->with('error', $e->getMessage);
         }
     }
 
@@ -263,18 +262,15 @@ class CategoryController extends Controller
             if ($category->status == 'active') {
                 $data['status'] = 'inactive';
                 $category = $this->CategoryRepository->update($data, $id);
-
             } else {
                 $data['status'] = 'active';
                 $category = $this->CategoryRepository->update($data, $id);
             }
             return $category;
-
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
 
             $exception = $e->getMessage();
             return $exception;
         }
-
     }
 }
