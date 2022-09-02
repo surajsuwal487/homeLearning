@@ -9,12 +9,13 @@ use Modules\InventoryManagement\Entities\CategoryImages;
 use Modules\InventoryManagement\Entities\Tag;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 
-
-class Category extends Model
+class Category extends Model implements HasMedia
 {
-    use HasFactory, Sluggable, SoftDeletes;
+    use HasFactory, Sluggable, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = [
         'name', 'slug', 'image', 'feature', 'status'
