@@ -7,29 +7,55 @@
                     <h5 class="text-capitalize">{{ auth()->user()->name }}</h5>
                 </div>
                 <ul class="nav navbar-nav float-right">
-                    <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i
-                                class="ficon feather icon-maximize"></i></a></li>
-                    
+
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">
                                 </span><span class="user-status"></span>
                             </div>
-                            @if(auth()->user()->image == NULL)
-                            <span><img class="round"
-                                src="{{ url('admin/images/default/default_user.png') }}"
-                                alt="avatar" height="40" width="40"></span>
+                            <i class="fa fa-bell"></i>
+                            @if(auth()->user()->unreadnotifications->count())
+                            <span class="badge badge-danger">{{ auth()->user()->unreadnotifications->count() }}</span>
+                            @endif
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a style="color: green" href="{{ route('markRead') }}">Mark all as Read</a>
+                            <br>
+                            @foreach (auth()->user()->unreadNotifications as $notification)
+                            <a style="background-color: lightgray" class="dropdown-item" href="page-user-profile.html"><i class="feather"></i>
+                                {{ $notification->data['data'] }}</a>                              
+                            @endforeach
+
+                            @foreach (auth()->user()->readNotifications as $notification)
+                            <a class="dropdown-item" href="page-user-profile.html"><i class="feather"></i>
+                                {{ $notification->data['data'] }}</a>                              
+                            @endforeach
+                        </div>
+                    </li>
+
+                    <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i
+                                class="ficon feather icon-maximize"></i></a></li>
+
+                    <li class="dropdown dropdown-user nav-item">
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                            <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">
+                                </span><span class="user-status"></span>
+                            </div>
+                            @if (auth()->user()->image == null)
+                                <span><img class="round" src="{{ url('admin/images/default/default_user.png') }}"
+                                        alt="avatar" height="40" width="40"></span>
                             @else
-                            <span><img class="round"
-                                    src="{{ url('uploads/images/users/'.auth()->user()->image) }}"
-                                    alt="avatar" height="40" width="40"></span>
+                                <span><img class="round"
+                                        src="{{ url('uploads/images/users/' . auth()->user()->image) }}" alt="avatar"
+                                        height="40" width="40"></span>
                             @endif
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="page-user-profile.html"><i class="feather icon-user"></i>
                                 Edit Profile</a>
-                                {{-- <form action="{{ route('cd-admin.edituser') }}"
+                            {{-- <form action="{{ route('cd-admin.edituser') }}"
                                                     method="get">
                                                     <input type="hidden" name="user" value="{{ auth()->user()->slug}}">
                                                     <button type="submit" class="dropdown-item">
@@ -40,7 +66,8 @@
                             <form method="get" action="{{ route('logout') }}">
                                 @csrf
                                 <!-- Authentication -->
-                                <a class="dropdown-item" href="route('logout')" onclick="event.preventDefault();
+                                <a class="dropdown-item" href="route('logout')"
+                                    onclick="event.preventDefault();
                                 this.closest('form').submit();">
                                     <i class="feather icon-power"></i> {{ __('Log Out') }}</a>
                             </form>

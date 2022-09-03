@@ -22,6 +22,10 @@ Route::get('/notification', function () {
     User::find(1)->notify(new TaskCompleted);
     dd('success');
 });
+Route::get('markAsRead', function(){
+    auth()->user()->unreadNotifications->markAsRead();
+    return redirect()->back();
+})->name('markRead');
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
